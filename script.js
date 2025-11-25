@@ -8,7 +8,7 @@
 
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    console.log('Iniciando resgate automático');
+    console.log('Starting automatic redemption');
     
     try {
         await sleep(3000);
@@ -20,14 +20,14 @@
         const text = await response.text();
         const codes = text.split('\n').map(code => code.trim()).filter(code => code.length > 0);
         
-        console.log(`${codes.length} códigos encontrados`);
+        console.log(`${codes.length} codes found`);
         
         await sleep(3000);
         
         for (let i = 0; i < codes.length; i++) {
             try {
                 const code = codes[i];
-                console.log(`[${i + 1}/${codes.length}] Processando: ${code}`);
+                console.log(`[${i + 1}/${codes.length}] Processing: ${code}`);
                 
                 await sleep(5000);
                 
@@ -35,7 +35,7 @@
                 const submitButton = document.querySelector('.cdkey-form__submit');
                 
                 if (!input || !submitButton) {
-                    console.log('Formulário não encontrado, pulando');
+                    console.log('Form not found, skipping');
                     continue;
                 }
                 
@@ -49,25 +49,25 @@
                     await sleep(5000);
                 }
                 
-                console.log(`Preenchido: ${code}`);
+                console.log(`Filled: ${code}`);
                 
                 await sleep(3000);
                 
                 submitButton.click();
-                console.log(`Enviado: ${code}`);
+                console.log(`Submitted: ${code}`);
                 
-                console.log('Aguardando 4 segundos antes do próximo código...');
+                console.log('Waiting 4 seconds before next code...');
                 await sleep(5000);
                 
             } catch (error) {
-                console.log(`Erro com o código ${code}, continuando...`);
+                console.log(`Error with code ${code}, continuing...`);
                 await sleep(5000);
             }
         }
         
-        console.log('Todos os códigos processados');
+        console.log('All codes processed');
         
     } catch (error) {
-        console.log('Erro geral, continuando...');
+        console.log('General error, continuing...');
     }
 })();
