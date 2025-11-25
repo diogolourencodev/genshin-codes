@@ -11,7 +11,7 @@ Ferramenta automatizada para resgatar códigos promocionais do Genshin Impact.
 4. Cole o código abaixo e pressione Enter:
 
 ```javascript
-fetch('https://raw.githubusercontent.com/diogolourencodev/genshin-codes/refs/heads/main/src/console.js').then(r=>r.text()).then(codigo=>eval(codigo))
+fetch('https://raw.githubusercontent.com/diogolourencodev/genshin-codes/refs/heads/main/src/script.js').then(r=>r.text()).then(codigo=>eval(codigo))
 ```
 
 ### Método 2: Script completo
