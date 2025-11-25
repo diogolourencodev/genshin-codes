@@ -6,67 +6,68 @@
         }
     };
 
-    console.log('🚀 Starting automatic redemption...');
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    console.log('Iniciando resgate automático');
     
     try {
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        await sleep(3000);
         
         const response = await fetch('https://raw.githubusercontent.com/diogolourencodev/genshin-codes/refs/heads/main/codes.txt');
         
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        await sleep(3000);
         
         const text = await response.text();
         const codes = text.split('\n').map(code => code.trim()).filter(code => code.length > 0);
         
-        console.log(`📋 ${codes.length} codes found`);
+        console.log(`${codes.length} códigos encontrados`);
         
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        await sleep(3000);
         
         for (let i = 0; i < codes.length; i++) {
             try {
                 const code = codes[i];
-                console.log(`🔄 [${i + 1}/${codes.length}] Processing: ${code}`);
+                console.log(`[${i + 1}/${codes.length}] Processando: ${code}`);
                 
-                await new Promise(resolve => setTimeout(resolve, 5000));
+                await sleep(5000);
                 
                 const input = document.getElementById('cdkey__code');
                 const submitButton = document.querySelector('.cdkey-form__submit');
                 
                 if (!input || !submitButton) {
-                    console.log('⏩ Skipping - form not found');
+                    console.log('Formulário não encontrado, pulando');
                     continue;
                 }
                 
-                await new Promise(resolve => setTimeout(resolve, 3000));
+                await sleep(3000);
                 
                 input.value = code;
                 
                 try {
                     input.dispatchEvent(new Event('input', { bubbles: true }));
                 } catch (e) {
-                    await new Promise(resolve => setTimeout(resolve, 5000))
+                    await sleep(5000);
                 }
                 
-                console.log(`✅ Filled: ${code}`);
+                console.log(`Preenchido: ${code}`);
                 
-                await new Promise(resolve => setTimeout(resolve, 3000));
+                await sleep(3000);
                 
-                // Submit
                 submitButton.click();
-                console.log(`✅ Submitted: ${code}`);
+                console.log(`Enviado: ${code}`);
                 
-                console.log('⏳ Waiting 4 seconds before next code...');
-                await new Promise(resolve => setTimeout(resolve, 5000));
+                console.log('Aguardando 4 segundos antes do próximo código...');
+                await sleep(5000);
                 
             } catch (error) {
-                console.log(`⚠️ Error with code ${code}, continuing...`);
-                await new Promise(resolve => setTimeout(resolve, 5000));
+                console.log(`Erro com o código ${code}, continuando...`);
+                await sleep(5000);
             }
         }
         
-        console.log('🎉 All codes processed!');
+        console.log('Todos os códigos processados');
         
     } catch (error) {
-        console.log('❌ General error, but continuing...');
+        console.log('Erro geral, continuando...');
     }
 })();
